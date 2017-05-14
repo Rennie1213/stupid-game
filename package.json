@@ -1,0 +1,21 @@
+{
+  "scripts": {
+    "client": "google-chrome http://localhost:3001/",
+    "server": "node build/server.js"
+  },
+  "dependencies": {
+    "@types/express": "^4.0.35",
+    "@types/mime": "0.0.29",
+    "@types/node": "^7.0.18",
+    "@types/websocket": "0.0.33",
+    "@types/ws": "0.0.41",
+    "express": "^4.15.2",
+    "express-ws": "^3.0.0",
+    "file-loader": "^0.11.1",
+    "ts-loader": "^2.0.3",
+    "typescript": "^2.4.0-dev.20170512",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.5.1",
+    "ws": "^2.3.1"
+  }
+}
