@@ -1,5 +1,5 @@
 interface Message {
-    type: string;:
+    type: string;
     payload: any;
 }
 

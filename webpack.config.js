@@ -20,7 +20,7 @@ module.exports = [{
     module: {
         loaders: [
             { test: /\.ts$/, loader: "ts-loader" },
-            { test: /\.png$/, loader: "url-loader?limit=10000" }
+            { test: /\.png$/, loader: "file-loader" }
         ]
     }
 }, {
@@ -34,7 +34,7 @@ module.exports = [{
     module: {
         loaders: [
             { test: /\.ts$/, loader: "ts-loader" },
-            { test: /\.png$/, loader: "url-loader?limit=10000" }
+            { test: /\.png$/, loader: "file-loader" }
         ]
     }
 }];

@@ -1,3 +1,5 @@
+import Message from 'shared/message';
+
 const HOST: string = "ws://localhost:3002";
 
 export default class Server {
@@ -8,24 +10,39 @@ export default class Server {
     protected messageListeners: Array<any> = [];
 
     constructor() {
-        this.websocket.onconnect = this.connectedToServer.bind(this);
+        console.debug('Attempting to init server connection!');
+        this.websocket.onopen = this.connectedToServer.bind(this);
     }
 
     public connectedToServer(server: any) {
 
+        console.debug('Connected to server');
+
         this.server = server;
         this.connected = true;
 
-        this.server.onmessage = this.notifyListeners.bind(this);
+        this.websocket.onmessage = (message: any) => {
+            this.connected = true;
+            this.notifyListeners(message, this.messageListeners);
+        }
     }
 
-    public addMessageListener = (fn: any) => {
+    public sendMessage(message: Message) {
+        if(!this.connected) return ;
+
+        this.websocket.send(JSON.stringify(message));
+    }
+
+    public addMessageListener = (fn: Function) => {
         this.messageListeners.push(fn);
     }
 
-    private notifyListeners = (message: any, fns: Array<any>) => {
-        console.debug('Notifying listeners', message);
-        for (let fn of fns)
-            fn(message);
+    private notifyListeners = (message: any, fns: Array<(message: any) => void>) => {
+
+        let parsedMessage = JSON.parse(message.data);
+        for (let fn of fns) {
+           fn(parsedMessage);
+        }
+
     }
 }

@@ -8,12 +8,15 @@ export default class World {
 
     public entities: Array<any> = [];
     public systems: Array<System> = [];
+    public entityCounter = 0;
 
     public tickTimer: any;
     private lastTick: Date = new Date;
 
-    public addEntity = (entity: Entity) =>
+    public addEntity = (entity: Entity) => {
+        entity.id = ++this.entityCounter;
         this.entities.push(entity);
+    }
 
     public addSystem = (system: System) =>
         this.systems.push(system);
@@ -27,10 +30,10 @@ export default class World {
             TICK_INTERVAL
         );
 
-    private replaceState = (entities: Array<any>) =>
+    public replaceState = (entities: Array<any>) =>
         this.entities = entities;
 
-    private snapshotState = () : Array<any> =>
+    public snapshotState = () : Array<any> =>
         this.entities;
 
     tick(): void {

@@ -1,7 +1,7 @@
 import Message from 'shared/message';
 
-export default class EntityUpdate implements Message {
-    public type: string = "entity-update";
+export default class Movement implements Message {
+    public type: string = "movement";
     public payload: any;
 
     public constructor(payload: any) {

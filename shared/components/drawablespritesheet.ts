@@ -1,4 +1,6 @@
-export default class DrawableSpritesheet {
+import Drawable from 'shared/components/drawable';
+
+export default class DrawableSpritesheet extends Drawable {
     public frameWidth: number;
     public frameHeight: number;
     public columns: number;
@@ -7,27 +9,21 @@ export default class DrawableSpritesheet {
     public currentColumn: number;
     public currentRow: number;
 
-    public imageData: string;
-    public element: any;
+    public type: string = "spritesheet";
+
 
     constructor(
-        imageData: string,
+        asset: string,
         frameWidth: number,
         frameHeight: number,
         columns: number,
         rows: number
     ) {
-        this.imageData = imageData;
+        super(asset);
+
         this.frameWidth = frameWidth;
         this.frameHeight = frameHeight;
         this.columns = columns;
         this.rows = rows;
-    }
-
-    init() {
-        if(this.element == undefined) {
-            this.element = document.createElement('img');
-            this.element.src = this.imageData;
-        }
     }
 }

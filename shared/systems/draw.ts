@@ -1,25 +1,33 @@
 import Entity from 'shared/entity';
 import System from 'shared/system';
+import AssetManager from 'client/assets';
 
 import DrawableSpritesheet from 'shared/components/drawablespritesheet';
 
 export default class Draw implements System{
 
-    constructor(private context: CanvasRenderingContext2D) {}
+
+    constructor(
+        private context: CanvasRenderingContext2D,
+        private assets: AssetManager
+    ) {
+    }
 
     appliesTo = (entity: Entity) =>
         entity.hasComponent("drawable");
 
     process = (entity: Entity, delta: number) => {
 
-        let position = entity.getComponent('position');
         let drawable = entity.getComponent("drawable");
+        let asset = this.assets.getAsset(drawable.asset);
+        if(!asset.loaded) return;
 
-        if (drawable instanceof DrawableSpritesheet) {
-            drawable.init();
+        let position = entity.getComponent('position');
+
+        if (drawable.type === "spritesheet") {
 
             this.context.drawImage(
-                drawable.element,
+                asset.element,
                 0,
                 0,
                 drawable.frameWidth,
@@ -36,5 +44,5 @@ export default class Draw implements System{
         this.clear();
 
     clear = () => 
-        this.context.clearRect(0,0, 100000, 100000);
+        this.context.clearRect(0,0, 10000, 10000);
 }
