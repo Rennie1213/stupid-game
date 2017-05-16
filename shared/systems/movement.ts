@@ -1,4 +1,3 @@
-import Controls from 'client/controls';
 import System from 'shared/system';
 import Entity from 'shared/entity';
 import Player from 'shared/entities/player';
@@ -6,12 +5,6 @@ import Player from 'shared/entities/player';
 const MOVEMENT_SPEED = 0.3;
 
 export default class Movement implements System {
-
-    private controls: Controls = new Controls;
-
-    constructor() {
-        this.controls.listen();
-    }
 
     appliesTo = (entity: Entity) => 
         entity instanceof Player;
@@ -21,18 +14,18 @@ export default class Movement implements System {
 
     process = (entity: Entity, delta: number) => {
         let position = entity.getComponent("position");
-        let movement = entity.getComponent("movement");
+        let controls = entity.getComponent("controls");
 
-        if (this.controls.isPressingUp())
+        if (controls.up)
             position.y -= MOVEMENT_SPEED * delta;
 
-        if (this.controls.isPressingDown())
+        if (controls.down)
             position.y += MOVEMENT_SPEED * delta;
 
-        if (this.controls.isPressingLeft())
+        if (controls.left)
             position.x -= MOVEMENT_SPEED * delta;
 
-        if (this.controls.isPressingRight())
+        if (controls.right)
             position.x += MOVEMENT_SPEED * delta;
     }
 }

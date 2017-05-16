@@ -1,6 +1,6 @@
 import Message from 'shared/message';
 
-const HOST: string = "ws://192.168.2.32:3002";
+const HOST: string = "ws://"+window.location.hostname+":3002/";
 
 export default class Server {
 

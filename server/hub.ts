@@ -2,6 +2,7 @@ import World from 'shared/world';
 import Player from 'shared/entities/player';
 import EntityUpdate from 'shared/messages/entityupdate';
 import Message from 'shared/message';
+import Movement from 'shared/systems/movement';
 
 export default class Hub {
 
@@ -9,13 +10,13 @@ export default class Hub {
     protected world: World = new World;
 
     constructor() {
+        this.world.addSystem(new Movement);
         this.world.tick();
 
         setInterval(this.syncGameState.bind(this), 50);
     }
 
     public addClient = (connection: any) => {
-        console.log("adding new player to hub");
 
         let player = new Player(1);
         let client = new Client(connection, player);
