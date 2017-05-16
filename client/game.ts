@@ -2,7 +2,7 @@ import Canvas from 'client/canvas'
 import Server from 'client/server';
 import Player from 'shared/entities/player';
 import Draw from 'shared/systems/draw';
-import ControlSystem from 'shared/systems/controls';
+import ControlSystem from 'client/systems/controls';
 import World from 'shared/world';
 import Network from 'shared/systems/network';
 //import AssetLoader from 'shared/systems/asset';

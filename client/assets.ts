@@ -3,7 +3,7 @@ export default class AssetManager {
 
     public loadDefaults() {
         this.addAsset('player', new Spritesheet(
-            'client/assets/spritesheets/death.png'
+            'client/assets/spritesheets/player.png'
         ));
     }
 

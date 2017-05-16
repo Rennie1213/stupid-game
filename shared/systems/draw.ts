@@ -11,6 +11,7 @@ export default class Draw implements System{
         private context: CanvasRenderingContext2D,
         private assets: AssetManager
     ) {
+        console.log('Init draw system');
     }
 
     appliesTo = (entity: Entity) =>
@@ -20,7 +21,8 @@ export default class Draw implements System{
 
         let drawable = entity.getComponent("drawable");
         let asset = this.assets.getAsset(drawable.asset);
-        if(!asset.loaded) return;
+
+        if(!asset || !asset.loaded) return;
 
         let position = entity.getComponent('position');
 

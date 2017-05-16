@@ -43,23 +43,15 @@ export default class Hub {
         let parsedMessage = JSON.parse(message.data);
 
         switch(parsedMessage.type) {
+
             case "movement":
-                let controls = parsedMessage.payload;
-                let position = client.player.getComponent("position");
-                let movement = client.player.getComponent("movement");
+                let controlState = parsedMessage.payload;
+                let controls = client.player.getComponent("controls");
 
-                if(controls.moving_up) 
-                    position.y -= movement.speed;
-
-                if(controls.moving_down) 
-                    position.y += movement.speed;
-
-                if(controls.moving_left) 
-                    position.x -= movement.speed;
-
-                if(controls.moving_right) 
-                    position.x += movement.speed;
-
+                controls.up = controlState.moving_up;
+                controls.down = controlState.moving_down;
+                controls.left = controlState.moving_left;
+                controls.right = controlState.moving_right;
             break;
         }
     }

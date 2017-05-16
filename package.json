@@ -1,7 +1,9 @@
 {
   "scripts": {
     "client": "google-chrome http://localhost:3001/",
-    "server": "node build/server.js"
+    "server": "node build/server.js",
+    "build": "node --max-old-space-size=4000 ./node_modules/webpack/bin/webpack.js",
+    "watch": "node --max-old-space-size=4000 ./node_modules/webpack/bin/webpack.js --watch"
   },
   "dependencies": {
     "@types/express": "^4.0.35",

@@ -11,6 +11,7 @@ let resolve = {
 
 
 module.exports = [{
+    target: 'node', 
     entry: "./client/index.ts",
     output: {
         path: path.join(__dirname, "build"),
