@@ -37,8 +37,9 @@ export default class Hub {
     }
 
     public removeClient = (client: Client) => {
-        console.log("removing player from hub");
         this.clients.splice(this.clients.indexOf(client), 1);
+
+        this.world.removeEntity(client.player);
     }
 
     public handleMessage(client: Client, message: any) {

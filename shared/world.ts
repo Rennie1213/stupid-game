@@ -24,6 +24,9 @@ export default class World {
     public findEntity = (id: number) : Entity =>
         this.entities.find((entity: Entity) => entity.id == id)
 
+    public removeEntity = (entity: Entity) =>
+        this.entities.splice(this.entities.indexOf(entity), 1)
+
     private setTickTimer = () =>
         this.tickTimer = setInterval(
             this.tick.bind(this),
