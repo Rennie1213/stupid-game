@@ -3,6 +3,7 @@ import Player from 'shared/entities/player';
 import EntityUpdate from 'shared/messages/entityupdate';
 import Message from 'shared/message';
 import Movement from 'shared/systems/movement';
+var WebSocket = require('ws');
 
 export default class Hub {
 
@@ -61,6 +62,8 @@ export default class Hub {
     // Syncs the current entitie list with all clients
     public syncGameState() {
         for (let client of this.clients) {
+
+
             let entityMessage = new EntityUpdate(this.world.entities);
             client.sendMessage(entityMessage);
         }
@@ -77,6 +80,10 @@ class Client {
     }
 
     public sendMessage(message: Message) {
+        if (this.connection.readyState !== WebSocket.OPEN)  {
+            return ;
+        }
+
         this.connection.send(JSON.stringify(message));
     }
 }

@@ -16,8 +16,6 @@ export default class Server {
 
     public connectedToServer(server: any) {
 
-        console.debug('Connected to server');
-
         this.server = server;
         this.connected = true;
 
