@@ -1,4 +1,4 @@
 Stupid game
 ===========
 
-Top-down multiplayer RPG. Uses an ECS model to perform its magic.
+Top-down game about surviving a post-apolyptic world filled with abominations of evolution.
