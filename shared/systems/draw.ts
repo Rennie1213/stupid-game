@@ -30,8 +30,8 @@ export default class Draw implements System{
 
             this.context.drawImage(
                 asset.element,
-                0,
-                0,
+                drawable.frameWidth * drawable.currentColumn,
+                drawable.frameHeight * drawable.currentRow,
                 drawable.frameWidth,
                 drawable.frameHeight,
                 position.x,
@@ -39,6 +39,11 @@ export default class Draw implements System{
                 drawable.frameWidth,
                 drawable.frameHeight,
             );
+        }
+
+        // Draw all additional junk on top of it
+        if(entity.hasComponent('accessoires')) {
+            console.debug('Drawable has accessoires');
         }
     }
 

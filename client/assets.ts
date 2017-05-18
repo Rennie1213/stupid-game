@@ -5,6 +5,22 @@ export default class AssetManager {
         this.addAsset('player', new Spritesheet(
             'client/assets/spritesheets/player.png'
         ));
+
+        this.addAsset('accessoires.hair.1', new Spritesheet(
+            'client/assets/spritesheets/accessoires/hair/1.png'
+        ));
+
+        this.addAsset('accessoires.facial-hair.1', new Spritesheet(
+            'client/assets/spritesheets/accessoires/facial-hair/1.png'
+        ));
+        
+        this.addAsset('accessoires.eyes.1', new Spritesheet(
+            'client/assets/spritesheets/accessoires/eyes/1.png'
+        ));
+
+        this.addAsset('accessoires.expressions.angry', new Spritesheet(
+            'client/assets/spritesheets/accessoires/expressions/angry.png'
+        ));
     }
 
     public addAsset(name: string, asset: Asset) {

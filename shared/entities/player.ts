@@ -22,10 +22,17 @@ export default class Player extends Entity {
         this.addComponent('movement', new Movement(PLAYER_SPEED));
         this.addComponent('controls', new Controls);
 
+        this.addComponent('accessoires', [
+            'accessoires.facial-hair.1',
+            'accessoires.hair.1',
+            'accessoires.eyes.1',
+            'accessoires.expressions.angry'
+        ]);
+
         this.addComponent('drawable', new DrawableSpritesheet(
             "player",
-            72,
             96,
+            141,
             3,
             4
         ));

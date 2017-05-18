@@ -25,5 +25,8 @@ export default class DrawableSpritesheet extends Drawable {
         this.frameHeight = frameHeight;
         this.columns = columns;
         this.rows = rows;
+
+        this.currentColumn = 1;
+        this.currentRow = 2;
     }
 }
