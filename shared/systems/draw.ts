@@ -43,7 +43,24 @@ export default class Draw implements System{
 
         // Draw all additional junk on top of it
         if(entity.hasComponent('accessoires')) {
-            console.debug('Drawable has accessoires');
+            let accessoires = entity.getComponent('accessoires');
+
+            for (let accessoire of accessoires) {
+                let accessoireAsset = this.assets.getAsset(accessoire);
+
+                this.context.drawImage(
+                    accessoireAsset.element,
+
+                    drawable.frameWidth * drawable.currentColumn,
+                    drawable.frameHeight * drawable.currentRow,
+                    drawable.frameWidth,
+                    drawable.frameHeight,
+                    position.x,
+                    position.y,
+                    drawable.frameWidth,
+                    drawable.frameHeight,
+                );
+            }
         }
     }
 
