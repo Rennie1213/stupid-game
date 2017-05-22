@@ -13,19 +13,35 @@ export default class Movement implements System {
         {}
 
     process = (entity: Entity, delta: number) => {
+        let moving = false;
         let position = entity.getComponent("position");
         let controls = entity.getComponent("controls");
+        let movement = entity.getComponent("movement");
 
-        if (controls.up)
+        if (controls.up) {
             position.y -= MOVEMENT_SPEED * delta;
+            moving = true;
+            movement.direction = 0;
+        }
 
-        if (controls.down)
+        if (controls.down) {
             position.y += MOVEMENT_SPEED * delta;
+            moving = true;
+            movement.direction = 2;
+        }
 
-        if (controls.left)
+        if (controls.left) {
             position.x -= MOVEMENT_SPEED * delta;
+            moving = true;
+            movement.direction = 1;
+        }
 
-        if (controls.right)
+        if (controls.right) {
             position.x += MOVEMENT_SPEED * delta;
+            moving = true;
+            movement.direction = 3;
+        }
+
+        movement.moving = moving;
     }
 }

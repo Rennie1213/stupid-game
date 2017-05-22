@@ -1,7 +1,15 @@
-export default class Entity {
+export default abstract class Entity {
 
     public id: number;
     private components: any = {};
+
+    abstract initialComponents() : any;
+
+    public constructor(id: number) {
+        this.id = id;
+
+        this.components = this.initialComponents();
+    }
 
     public addComponent = (name: string, component: any) =>
         this.components[name] = component;

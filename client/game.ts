@@ -1,11 +1,10 @@
 import Canvas from 'client/canvas'
 import Server from 'client/server';
 import Player from 'shared/entities/player';
-import Draw from 'shared/systems/draw';
+import DrawPlayer from 'shared/systems/drawplayer';
 import ControlSystem from 'client/systems/controls';
 import World from 'shared/world';
 import Network from 'shared/systems/network';
-//import AssetLoader from 'shared/systems/asset';
 import AssetManager from 'client/assets';
 
 export default class Game {
@@ -20,7 +19,6 @@ export default class Game {
     private world: World = new World;
     private server: Server = new Server;
     private assets: AssetManager = new AssetManager;
-    private drawSystem: Draw = new Draw(this.context, this.assets);
 
     constructor() {
 
@@ -57,7 +55,7 @@ export default class Game {
 
         this.canvas.updateDimensions();
 
-        this.world.addSystem(this.drawSystem);
+        this.world.addSystem(new DrawPlayer(this.context, this.assets));
         this.world.addSystem(new Network(this.server));
         this.world.addSystem(new ControlSystem(this.server));
         //this.world.addSystem(new AssetLoader);

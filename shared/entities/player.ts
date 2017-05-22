@@ -9,33 +9,29 @@ const PLAYER_SPEED = 0.8;
 
 export default class Player extends Entity {
 
-    public constructor(id: number)  {
-        super();
-
-        this.id = id;
-
-        this.addComponent('position', new Positionable(
-            Math.random() * 100,
-            Math.random() * 100
-        ));
-        this.addComponent('network', new Networked);
-        this.addComponent('movement', new Movement(PLAYER_SPEED));
-        this.addComponent('controls', new Controls);
-
-        this.addComponent('accessoires', [
-            'accessoires.facial-hair.1',
-            'accessoires.hair.1',
-            'accessoires.eyes.1',
-            'accessoires.expressions.angry'
-        ]);
-
-        this.addComponent('drawable', new DrawableSpritesheet(
-            "player",
-            96,
-            141,
-            3,
-            4
-        ));
-
+    public initialComponents() : any {
+        return {
+            'network' : new Networked,
+            'movement': new Movement(PLAYER_SPEED),
+            'controls': new Controls,
+            'position':  new Positionable(
+                0, 0
+            ),
+            'drawable': new DrawableSpritesheet(
+                "player",
+                96,
+                141,
+                3,
+                4
+            ),
+            'accessoires': [
+                'accessoires.facial-hair.1',
+                'accessoires.hair.1',
+                'accessoires.eyes.1',
+                'accessoires.expressions.angry'
+            ],
+        };
     }
+
+
 }

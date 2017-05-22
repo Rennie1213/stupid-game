@@ -14,6 +14,7 @@
     "express": "^4.15.2",
     "express-ws": "^3.0.0",
     "file-loader": "^0.11.1",
+    "null-loader": "^0.1.1",
     "ts-loader": "^2.0.3",
     "typescript": "^2.4.0-dev.20170519",
     "url-loader": "^0.5.8",
