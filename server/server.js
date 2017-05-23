@@ -7,16 +7,14 @@ var express = require('express');
 
 export default class Server {
 
-    protected hub: Hub = new Hub;
-
-    protected webserver: any = express();
-    protected socketServer: SocketServer = new SocketServer(this.hub);
-
     constructor() {
+        this.hub = new Hub;
+        this.webserver = express();
+        this.socketServer = new SocketServer(this.hub);
         this.setupWebserver();
     }
 
-    private setupWebserver() {
+    setupWebserver() {
         this.webserver.use('/', express.static('build'));
         this.webserver.listen(PORT);
     }

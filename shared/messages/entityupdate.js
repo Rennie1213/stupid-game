@@ -1,5 +1,5 @@
 export default class EntityUpdate {
-    public constructor(payload) {
+    constructor(payload) {
         this.payload = payload;
         this.type = "entity-update";
     }

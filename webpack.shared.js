@@ -5,6 +5,7 @@ module.exports = function (config) {
 
 		devtool: 'eval-source-map',
         watch: true,
+        target: 'node',
 
 	    stats: {
 	    	color: true,

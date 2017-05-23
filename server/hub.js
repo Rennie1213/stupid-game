@@ -1,23 +1,21 @@
 import World from 'shared/world';
 import Player from 'shared/entities/player';
 import EntityUpdate from 'shared/messages/entityupdate';
-import Message from 'shared/message';
 import Movement from 'shared/systems/movement';
 var WebSocket = require('ws');
 
 export default class Hub {
 
-    protected clients: Array<Client> = [];
-    protected world: World = new World;
-
     constructor() {
+        this.clients = [];
+        this.world = new World;
         this.world.addSystem(new Movement);
         this.world.tick();
 
         setInterval(this.syncGameState.bind(this), 50);
     }
 
-    public addClient = (connection: any) => {
+    addClient = (connection) => {
 
         let player = new Player(1);
         let client = new Client(connection, player);
@@ -31,18 +29,18 @@ export default class Hub {
             this.removeClient(client);
         }
 
-        client.connection.onmessage = (message: any) => {
+        client.connection.onmessage = (message) => {
             this.handleMessage(client, message);
         };
     }
 
-    public removeClient = (client: Client) => {
+    removeClient = (client) => {
         this.clients.splice(this.clients.indexOf(client), 1);
 
         this.world.removeEntity(client.player);
     }
 
-    public handleMessage(client: Client, message: any) {
+    handleMessage(client, message) {
         let parsedMessage = JSON.parse(message.data);
 
         switch(parsedMessage.type) {
@@ -61,7 +59,7 @@ export default class Hub {
 
 
     // Syncs the current entitie list with all clients
-    public syncGameState() {
+    syncGameState() {
         for (let client of this.clients) {
 
 
@@ -72,15 +70,12 @@ export default class Hub {
 }
 
 class Client {
-    public connection: any;
-    public player: Player;
-
-    constructor(connection: any, player: Player) {
+    constructor(connection, player) {
         this.connection = connection;
         this.player = player;
     }
 
-    public sendMessage(message: Message) {
+    sendMessage(message) {
         if (this.connection.readyState !== WebSocket.OPEN)  {
             return ;
         }
