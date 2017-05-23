@@ -9,7 +9,7 @@ const PLAYER_SPEED = 0.8;
 
 export default class Player extends Entity {
 
-    public initialComponents() : any {
+    initialComponents() {
         return {
             'network' : new Networked,
             'movement': new Movement(PLAYER_SPEED),

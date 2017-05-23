@@ -1,5 +1,4 @@
 import Controls from 'client/controls';
-import System from 'shared/system';
 import Entity from 'shared/entity';
 import Player from 'shared/entities/player';
 import Movement from 'shared/messages/movement';
@@ -7,23 +6,21 @@ import Server from 'client/server';
 
 const MOVEMENT_SPEED = 0.3;
 
-export default class ControlSystem implements System {
+export default class ControlSystem {
 
-    private controls: Controls = new Controls;
-    private server: Server;
-
-    constructor(server: Server) {
+    constructor(server) {
+        this.controls = new Controls;
         this.controls.listen();
         this.server = server;
     }
 
-    appliesTo = (entity: Entity) => 
+    appliesTo = (entity) => 
         entity instanceof Player;
 
     startTick = () =>
         {}
 
-    process = (entity: Entity, delta: number) => {
+    process = (entity, delta) => {
         let position = entity.getComponent("position");
         let movement = entity.getComponent("movement");
 

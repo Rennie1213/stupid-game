@@ -4,7 +4,7 @@ module.exports = function (config) {
 	let base = {
 
 		devtool: 'eval-source-map',
-	    watch: true,
+        watch: true,
 
 	    stats: {
 	    	color: true,
@@ -20,8 +20,12 @@ module.exports = function (config) {
 	        extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
 	    },
 	    module: {
-	        loaders: [
-	            { test: /\.ts$/, loader: "ts-loader" },
+	        rules: [
+	            { 
+                    test: /\.js$/,
+                    loader: "babel-loader",
+                    exclude: /node_modules/
+                },
 	            { test: /\.png$/, loader: "file-loader" },
 	            { test: /(\.md|\.html)$/, loader: "null-loader" },
 	        ]

@@ -1,7 +1,10 @@
 export default class AssetManager {
-    protected assets: any = {};
 
-    public loadDefaults() {
+    constructor() {
+        this.assets = {};
+    }
+
+    loadDefaults() {
         this.addAsset('player', new Spritesheet(
             'client/assets/spritesheets/player.png'
         ));
@@ -23,48 +26,41 @@ export default class AssetManager {
         ));
     }
 
-    public addAsset(name: string, asset: Asset) {
+    addAsset(name, asset) {
         this.assets[name] = asset;
     }
 
-    public getAsset(name: string) {
+    getAsset(name) {
         return this.assets[name];
     }
 }
 
-interface Asset {
-    loaded: boolean;
-}
-
-class ImageAsset implements Asset {
-    public loaded: boolean = false;
-    public source: string;
-    public element: HTMLImageElement;
-
-    constructor(source: string) {
+class ImageAsset {
+    constructor(source) {
         this.source = source;
+        this.loaded = false;
 
         this.load();
     }
 
-    public load() {
+    load() {
         if(!this.source) {
             console.warn('Loading image asset without source!!');
         }
 
         let source = require("../" + this.source);
-        this.element = <HTMLImageElement> document.createElement('img');
+        this.element = document.createElement('img');
         this.element.src = source;
         this.element.onload = this.onLoad.bind(this);
     }
 
-    public onLoad() {
+    onLoad() {
         this.loaded = true;
     }
 }
 
-class Spritesheet extends ImageAsset implements Asset {
-    constructor(source: string) {
+class Spritesheet extends ImageAsset {
+    constructor(source) {
         super(source);
     }
 }

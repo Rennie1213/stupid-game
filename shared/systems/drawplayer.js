@@ -1,24 +1,20 @@
 import Entity from 'shared/entity';
-import System from 'shared/system';
 import AssetManager from 'client/assets';
 
 import DrawableSpritesheet from 'shared/components/drawablespritesheet';
 
-export default class DrawPlayer implements System{
+export default class DrawPlayer {
 
-
-    constructor(
-        private context: CanvasRenderingContext2D,
-        private assets: AssetManager
-    ) {
-        console.log('Init draw system');
+    constructor(context, assets) {
+        this.context = context;
+        this.assets = assets;
     }
 
-    appliesTo = (entity: Entity) =>
+    appliesTo = (entity) =>
         entity.hasComponent("drawable") &&
         entity.getComponent("drawable").type == "spritesheet";
 
-    process = (entity: Entity, delta: number) => {
+    process = (entity, delta) => {
 
         let drawable = entity.getComponent("drawable");
         let movement = entity.getComponent("movement");

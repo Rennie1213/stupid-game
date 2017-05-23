@@ -1,12 +1,12 @@
-import System from 'shared/system';
 import Entity from 'shared/entity';
 import Server from 'client/server';
 
-export default class Network implements System {
+export default class Network {
 
-    private messageBuffer: Array<any> = [];
+    constructor(server) {
+        this.messageBuffer = [];
 
-    constructor(private server: Server) {
+        this.server = server;
         
         this.server.addMessageListener(
             this.handleMessage.bind(this)
@@ -15,15 +15,15 @@ export default class Network implements System {
 
     startTick = () => {}
 
-    appliesTo = (entity: Entity) : boolean => 
+    appliesTo = (entity) => 
         entity.hasComponent("network");
 
-    process = (entity: Entity) => {
+    process = (entity) => {
         for (let message of this.messageBuffer) {
 
         }
     }
 
-    handleMessage = (event: Event) =>
+    handleMessage = (event) =>
         this.messageBuffer.push(event);
 }

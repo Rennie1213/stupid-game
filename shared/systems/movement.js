@@ -1,18 +1,17 @@
-import System from 'shared/system';
 import Entity from 'shared/entity';
 import Player from 'shared/entities/player';
 
 const MOVEMENT_SPEED = 0.3;
 
-export default class Movement implements System {
+export default class Movement {
 
-    appliesTo = (entity: Entity) => 
+    appliesTo = (entity) => 
         entity instanceof Player;
 
     startTick = () =>
         {}
 
-    process = (entity: Entity, delta: number) => {
+    process = (entity, delta) => {
         let moving = false;
         let position = entity.getComponent("position");
         let controls = entity.getComponent("controls");

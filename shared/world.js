@@ -1,45 +1,42 @@
-import Entity from 'shared/entity';
-import System from 'shared/system';
-
 const TICK_INTERVAL = 50;
 const IS_BROWSER = typeof window !== 'undefined';
 
 export default class World {
 
-    public entities: Array<any> = [];
-    public systems: Array<System> = [];
-    public entityCounter = 0;
+    constructor() {
+        this.entities = [];
+        this.systems = [];
+        this.entityCounter = 0;
+        this.lastTick = new Date;
+    }
 
-    public tickTimer: any;
-    private lastTick: Date = new Date;
-
-    public addEntity = (entity: Entity) => {
+    addEntity = (entity) => {
         entity.id = ++this.entityCounter;
         this.entities.push(entity);
     }
 
-    public addSystem = (system: System) =>
+    addSystem = (system) =>
         this.systems.push(system);
 
-    public findEntity = (id: number) : Entity =>
-        this.entities.find((entity: Entity) => entity.id == id)
+    findEntity = (id) =>
+        this.entities.find((entity) => entity.id == id)
 
-    public removeEntity = (entity: Entity) =>
+    removeEntity = (entity) =>
         this.entities.splice(this.entities.indexOf(entity), 1)
 
-    private setTickTimer = () =>
+    setTickTimer = () =>
         this.tickTimer = setInterval(
             this.tick.bind(this),
             TICK_INTERVAL
         );
 
-    public replaceState = (entities: Array<any>) =>
+    replaceState = (entities) =>
         this.entities = entities;
 
-    public snapshotState = () : Array<any> =>
+    snapshotState = () =>
         this.entities;
 
-    tick(): void {
+    tick() {
 
         let delta = new Date().valueOf() - this.lastTick.valueOf();
         this.lastTick = new Date();

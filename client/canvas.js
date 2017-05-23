@@ -2,22 +2,24 @@ import CanvasDimensions from 'client/canvasDimensions';
 
 export default class Canvas {
 
-    public constructor(private canvas: HTMLCanvasElement) {}
+    constructor(canvas) {
+        this.canvas = canvas;
+    }
 
-    public getRenderContext = (): CanvasRenderingContext2D =>
+    getRenderContext = () =>
         this.canvas.getContext("2d");
 
-    public updateDimensions = () =>
+    updateDimensions = () =>
         this.setDimensions(this.getDimensions());
 
 
-    private getDimensions = (): CanvasDimensions =>
+    getDimensions = () =>
         new CanvasDimensions(
             window.innerWidth, window.innerHeight
         );
 
 
-    private setDimensions(dimensions: CanvasDimensions) {
+    setDimensions(dimensions) {
         this.canvas.width = dimensions.width;
         this.canvas.height = dimensions.height;
     }

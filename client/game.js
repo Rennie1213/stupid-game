@@ -8,26 +8,27 @@ import Network from 'shared/systems/network';
 import AssetManager from 'client/assets';
 
 export default class Game {
-
-    private canvas: Canvas = new Canvas(
-        <HTMLCanvasElement> document.querySelector("canvas#game")
-    );
-
-    private context: CanvasRenderingContext2D =
-        this.canvas.getRenderContext();
-
-    private world: World = new World;
-    private server: Server = new Server;
-    private assets: AssetManager = new AssetManager;
-
+    
     constructor() {
 
+        this.canvas = new Canvas(
+            document.querySelector("canvas#game")
+        );
+
+        this.context = this.canvas.getRenderContext();
+
+        this.world = new World;
+        this.server = new Server;
+        this.assets = new AssetManager;
+
         this.assets.loadDefaults();
+
+        console.debug('Please kill me');
 
         /**
          * Set sync listener
          */
-        this.server.addMessageListener((message: any) => {
+        this.server.addMessageListener((message) => {
             if(message.type === "entity-update") {
                 let newState = [];
 

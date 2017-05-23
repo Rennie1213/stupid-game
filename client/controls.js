@@ -1,30 +1,33 @@
 export default class Controls {
-    public keys: any = {};
 
-    public listen() {
+    constructor() {
+        this.keys = {};
+    }
+
+    listen() {
         let listen = document.addEventListener;
 
         listen("keydown", this.keyDown, false);
         listen("keyup", this.keyUp, false);
     }
 
-    private keyDown = (event: KeyboardEvent) =>
+    keyDown = (event) =>
         this.keys[event.keyCode] = true;
 
 
-    private keyUp = (event: KeyboardEvent) =>
+    keyUp = (event) =>
         this.keys[event.keyCode] = false;
 
-    public isPressingUp = () : boolean =>
+    isPressingUp = () =>
         (this.keys[38] || this.keys[87]);
 
-    public isPressingDown = () : boolean =>
+    isPressingDown = () =>
         (this.keys[40] || this.keys[83]);
 
-    public isPressingLeft = () : boolean =>
+    isPressingLeft = () =>
         (this.keys[65] || this.keys[37]);
 
-    public isPressingRight = () : boolean =>
+    isPressingRight = () =>
         (this.keys[68] || this.keys[39]);
 
 }
