@@ -32,13 +32,13 @@ export default class Movement {
         if (controls.left) {
             position.x -= MOVEMENT_SPEED * delta;
             moving = true;
-            movement.direction = 1;
+            movement.direction = 3;
         }
 
         if (controls.right) {
             position.x += MOVEMENT_SPEED * delta;
             moving = true;
-            movement.direction = 3;
+            movement.direction = 1;
         }
 
         movement.moving = moving;
